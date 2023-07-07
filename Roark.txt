@@ -1,0 +1,20 @@
+Name:Roark
+Player Name:Mads
+Attributes:
+Dexterity: 3
+Technical: 2
+Mechanical: 3
+Perception: 3
+Knowledge: 2
+Strength: 3
+Skills:
+: 2
+2: 2
+Brawling: 2
+Blaster: 2
+Starship Piloting: 2
+Equipment:
+Force Points:0
+Dark Side Points:0
+Skill Points:0
+Wound Status0
