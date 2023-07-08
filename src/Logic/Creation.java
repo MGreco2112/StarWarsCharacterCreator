@@ -31,6 +31,7 @@ public class Creation {
     }
 
     private static void attributePointDistribution() {
+        //TODO implement splitting up dice into individual modifiers as an option
         System.out.println("Is your character Force Sensitive? [y/n]");
         String choice = scanner.nextLine();
 
@@ -76,6 +77,9 @@ public class Creation {
     }
 
     private static void skillPointDistribution() {
+        //TODO build list of skills based on Attribute class
+        //Have parent Attribute die code added to child Skill die code
+        //TODO implement splitting up dice into added modifiers
         System.out.println("Enter the number of Skills you want to allocate points for:");
         String numOfSkills = scanner.nextLine();
         Integer parsedNumOfSkills = parseInteger(numOfSkills);
