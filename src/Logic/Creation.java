@@ -1,5 +1,7 @@
 package Logic;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Creation {
@@ -176,7 +178,49 @@ public class Creation {
         }
     }
 
-    public static PlayerCharacter controlFlow() {
+    public static void writeCharacterToFile(PlayerCharacter newCharacter) {
+        try {
+            FileWriter myWriter = new FileWriter(newCharacter.getName() + ".txt");
+            myWriter.write("Name:" + newCharacter.getName() + "\n");
+            myWriter.write("Player Name:" + newCharacter.getPlayerName() + "\n");
+            myWriter.write("Attributes:\n");
+            for (String attribute : newCharacter.getAttributeMap().keySet()) {
+                myWriter.write(attribute + ": " + newCharacter.getAttributeMap().get(attribute) + "\n");
+            }
+            myWriter.write("Skills:\n");
+            for (String skill : newCharacter.getSkillMap().keySet()) {
+                myWriter.write(skill + ": " + newCharacter.getSkillMap().get(skill) + "\n");
+            }
+            myWriter.write("Equipment:\n");
+            for (Equipment equipment : newCharacter.getEquipment()) {
+                if (equipment instanceof Weapon) {
+                    myWriter.write(equipment.getName() + ", ");
+                    myWriter.write(((Weapon) equipment).getDamageCode() + ", ");
+                    myWriter.write("Range: (");
+                    for (int i = 0; i < ((Weapon) equipment).getRange().length; i++) {
+                        myWriter.write(((Weapon) equipment).getRange()[i]);
+                        if (i < 2) {
+                            myWriter.write(", ");
+                        } else {
+                            myWriter.write(")\n");
+                        }
+                    }
+                } else {
+                    myWriter.write(equipment.getName() + "\n");
+                }
+            }
+            myWriter.write("Force Points:" + newCharacter.getForcePoints() + "\n");
+            myWriter.write("Dark Side Points:" + newCharacter.getDarkSidePoints() + "\n");
+            myWriter.write("Skill Points:" + newCharacter.getSkillPoints() + "\n");
+            myWriter.write("Wound Status" + newCharacter.getWoundStatus() + "\n");
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void controlFlow() {
         nameEntry();
         attributePointDistribution();
         skillPointDistribution();
@@ -185,6 +229,6 @@ public class Creation {
         PlayerCharacter newCh = new PlayerCharacter(name, playerName, attributeMap, skillMap);
         newCh.setEquipment(equipment);
 
-        return newCh;
+        writeCharacterToFile(newCh);
     }
 }
