@@ -129,7 +129,9 @@ public class Creation {
                 case "w":
                 case "W":
                     Integer parsedDamageCode = 0;
-                    int[] parsedRanges = new int[3];
+                    Integer parsedShortRange = 0;
+                    Integer parsedMediumRange = 0;
+                    Integer parsedLongRange = 0;
                     String[] ranges = new String[] {"Short", "Medium", "Long"};
 
                     System.out.println("Enter the name of the Weapon:");
@@ -160,10 +162,16 @@ public class Creation {
 
                         } while (parsedRange == null || parsedRange < 1);
 
-                        parsedRanges[i] = parsedRange;
+                        if (i == 0) {
+                            parsedShortRange = parsedRange;
+                        } else if (i == 1) {
+                            parsedMediumRange = parsedRange;
+                        } else {
+                            parsedLongRange = parsedRange;
+                        }
                     }
 
-                    equipment.add(new Weapon(weaponName, parsedDamageCode, parsedRanges));
+                    equipment.add(new Weapon(weaponName, parsedDamageCode, parsedShortRange, parsedMediumRange, parsedLongRange));
                     break;
 
                 case "e":
@@ -185,38 +193,33 @@ public class Creation {
     public static void writeCharacterToFile(PlayerCharacter newCharacter) {
         try {
             FileWriter myWriter = new FileWriter(newCharacter.getName() + ".txt");
-            myWriter.write("Name:" + newCharacter.getName() + "\n");
-            myWriter.write("Player Name:" + newCharacter.getPlayerName() + "\n");
+            myWriter.write("Name: " + newCharacter.getName() + "\n");
+            myWriter.write("Player Name: " + newCharacter.getPlayerName() + "\n");
             myWriter.write("Attributes:\n");
             for (String attribute : newCharacter.getAttributeMap().keySet()) {
-                myWriter.write(attribute + ": " + newCharacter.getAttributeMap().get(attribute) + "\n");
+                myWriter.write("\t" + attribute + ": " + newCharacter.getAttributeMap().get(attribute) + "D\n");
             }
             myWriter.write("Skills:\n");
             for (String skill : newCharacter.getSkillMap().keySet()) {
-                myWriter.write(skill + ": " + newCharacter.getSkillMap().get(skill) + "\n");
+                myWriter.write("\t" + skill + ": " + newCharacter.getSkillMap().get(skill) + "D\n");
             }
             myWriter.write("Equipment:\n");
             for (Equipment equipment : newCharacter.getEquipment()) {
                 if (equipment instanceof Weapon) {
-                    myWriter.write(equipment.getName() + ", ");
-                    myWriter.write(((Weapon) equipment).getDamageCode() + ", ");
+                    myWriter.write("\t" + equipment.getName() + ", ");
+                    myWriter.write(((Weapon) equipment).getDamageCode() + "D, ");
                     myWriter.write("Range: (");
-                    for (int i = 0; i < ((Weapon) equipment).getRange().length; i++) {
-                        myWriter.write(((Weapon) equipment).getRange()[i]);
-                        if (i < 2) {
-                            myWriter.write(", ");
-                        } else {
-                            myWriter.write(")\n");
-                        }
-                    }
+                    myWriter.write(((Weapon) equipment).getMaxShortRange() + ", ");
+                    myWriter.write(((Weapon) equipment).getMaxMediumRange() + ", ");
+                    myWriter.write(((Weapon) equipment).getMaxLongRange() + ")\n");
                 } else {
-                    myWriter.write(equipment.getName() + "\n");
+                    myWriter.write("\t" + equipment.getName() + "\n");
                 }
             }
-            myWriter.write("Force Points:" + newCharacter.getForcePoints() + "\n");
-            myWriter.write("Dark Side Points:" + newCharacter.getDarkSidePoints() + "\n");
-            myWriter.write("Skill Points:" + newCharacter.getSkillPoints() + "\n");
-            myWriter.write("Wound Status" + newCharacter.getWoundStatus() + "\n");
+            myWriter.write("Force Points: " + newCharacter.getForcePoints() + "\n");
+            myWriter.write("Dark Side Points: " + newCharacter.getDarkSidePoints() + "\n");
+            myWriter.write("Skill Points: " + newCharacter.getSkillPoints() + "\n");
+            myWriter.write("Wound Status: " + newCharacter.getWoundStatus() + "\n");
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
