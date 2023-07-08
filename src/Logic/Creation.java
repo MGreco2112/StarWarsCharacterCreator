@@ -8,6 +8,7 @@ public class Creation {
     private static Scanner scanner = new Scanner(System.in);
     private static String name;
     private static String playerName;
+    //TODO implement a system to disallow more points to be added than are available
     private static Integer attributePoints = 18;
     private static Map<String, Integer> attributeMap = new HashMap<>();
     private static Integer skillPoints = 7;
@@ -80,6 +81,7 @@ public class Creation {
         //TODO build list of skills based on Attribute class
         //Have parent Attribute die code added to child Skill die code
         //TODO implement splitting up dice into added modifiers
+        //TODO prompt user before each skill if they want to enter one rather than frontload with hard number
         System.out.println("Enter the number of Skills you want to allocate points for:");
         String numOfSkills = scanner.nextLine();
         Integer parsedNumOfSkills = parseInteger(numOfSkills);
@@ -110,6 +112,7 @@ public class Creation {
     }
 
     private static void equipment() {
+        //TODO refactor to prompt user for any equipment to enter rather than frontload with hard number
         System.out.println("Equipment Entry:");
         System.out.println("How many pieces of Equipment will you enter?");
         String numOfEquip = scanner.nextLine();
@@ -149,7 +152,7 @@ public class Creation {
                     } while (parsedDamageCode == null || parsedDamageCode <= 0);
 
                     for (int j = 0; j < ranges.length; j++) {
-                        System.out.println("Enter the max " + ranges[i] + " range of " + weaponName + ":");
+                        System.out.println("Enter the max " + ranges[j] + " range of " + weaponName + ":");
                         Integer parsedRange = 0;
 
                         do {
@@ -162,9 +165,9 @@ public class Creation {
 
                         } while (parsedRange == null || parsedRange < 1);
 
-                        if (i == 0) {
+                        if (j == 0) {
                             parsedShortRange = parsedRange;
-                        } else if (i == 1) {
+                        } else if (j == 1) {
                             parsedMediumRange = parsedRange;
                         } else {
                             parsedLongRange = parsedRange;

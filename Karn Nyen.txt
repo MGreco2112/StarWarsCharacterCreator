@@ -9,10 +9,10 @@ Attributes:
 	Strength: 3D
 Skills:
 	Blaster Combat: 2D
-	Starship Repair: 2D
 	Starship Piloting: 3D
+	Starship Repair: 2D
 Equipment:
-	Blaster Pistol, 4D, Range: (120, 0, 0)
+	Blaster Pistol, 4D, Range: (10, 30, 120)
 	Comlink
 Force Points: 0
 Dark Side Points: 0
