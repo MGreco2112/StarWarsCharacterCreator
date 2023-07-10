@@ -92,32 +92,44 @@ public class Creation {
         //TODO build list of skills based on Attribute class
         //Have parent Attribute die code added to child Skill die code
         //TODO implement splitting up dice into added modifiers
+        String[] attributes = new String[] {"Dexterity", "Knowledge", "Mechanical", "Perception", "Strength", "Technical"};
         String continueLoop = "Y";
         System.out.println("Skill Point Distribution");
-        do {
-            System.out.println("You have " + skillPoints + "D remaining.");
-            System.out.println("Enter the name of the Skill you wish to attribute points towards:");
-            String skillName = scanner.nextLine();
-            System.out.println("How many D do you wish to allocate to " + skillName + "?\nmin 2 max 4.");
-            String allocatedPoints = scanner.nextLine();
+        for (int i = 0; i < attributes.length; i++) {
+            do {
+                System.out.println("Do you wish to allocate Skill Points toward any " + attributes[i] + "Skills? [y/n]");
+                String decision = scanner.nextLine();
 
-            Integer parsedAllocatedPoints = parseInteger(allocatedPoints);
+                if (decision.equalsIgnoreCase("n")) {
+                    System.out.println("No skills for this attribute.");
+                    break;
+                }
 
-            if (parsedAllocatedPoints == null || parsedAllocatedPoints < 2 || parsedAllocatedPoints > 4) {
-                System.out.println("Invalid Entry, try again");
-                continue;
-            }
+                System.out.println("You have " + skillPoints + "D remaining.");
+                System.out.println("Enter the name of the " + attributes[i] + " Skill you wish to attribute points towards:");
+                String skillName = scanner.nextLine();
+                System.out.println("How many D do you wish to allocate to " + skillName + "?\nmin 2 max 4.");
+                String allocatedPoints = scanner.nextLine();
 
-            skillMap.put(skillName, parsedAllocatedPoints);
-            skillPoints -= parsedAllocatedPoints;
+                Integer parsedAllocatedPoints = parseInteger(allocatedPoints);
 
-            System.out.println("Do you want to add points to another skill? [y/n]");
-            String choice = scanner.nextLine();
+                if (parsedAllocatedPoints == null || parsedAllocatedPoints < 2 || parsedAllocatedPoints > 4) {
+                    System.out.println("Invalid Entry, try again");
+                    break;
+                }
 
-            if (!choice.equalsIgnoreCase("y")) {
-                continueLoop = "N";
-            }
-        } while (continueLoop.equals("Y"));
+                skillMap.put(skillName, parsedAllocatedPoints);
+                skillPoints -= parsedAllocatedPoints;
+
+                System.out.println("Do you want to add points to another skill? [y/n]");
+                String choice = scanner.nextLine();
+
+                if (!choice.equalsIgnoreCase("y")) {
+                    continueLoop = "N";
+                }
+            } while (continueLoop.equals("Y"));
+        }
+
     }
 
     private static void customWeaponCreation() {
