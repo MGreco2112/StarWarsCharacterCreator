@@ -12,10 +12,10 @@ public class PlayerCharacter {
     private Integer woundStatus = 0;
     private Integer skillPoints = 0;
     private Map<String, Integer> attributeMap;
-    private Map<String, Integer> skillMap;
+    private List<Skill> skillMap;
     private List<Equipment> equipment;
 
-    public PlayerCharacter(String name, String playerName, Map<String, Integer> attributeMap, Map<String, Integer> skillMap) {
+    public PlayerCharacter(String name, String playerName, Map<String, Integer> attributeMap, List<Skill> skillMap) {
         this.name = name;
         this.playerName = playerName;
         forcePoints = 0;
@@ -81,11 +81,11 @@ public class PlayerCharacter {
         this.attributeMap = attributeMap;
     }
 
-    public Map<String, Integer> getSkillMap() {
+    public List<Skill> getSkillMap() {
         return skillMap;
     }
 
-    public void setSkillMap(Map<String, Integer> skillMap) {
+    public void setSkillMap(List<Skill> skillMap) {
         this.skillMap = skillMap;
     }
 

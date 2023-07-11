@@ -16,6 +16,33 @@ public class Creation {
                     P) Wookie Bowcaster, Q) Grenade, R) Thermal Detonator
             """
             ;
+    private static String dexteritySkills =
+            """
+                    A) Blaster, B) Brawling Pary, C) Dodge
+                    D) Grenade, E) Heavy Weapons, F) Melee Parry,
+                    H) Melee Weapons
+                    0) Exit
+            """
+            ;
+    private static String knowledgeSkills =
+            """
+                    A) Alien Races, B) Bureaucracy, C Languages
+                    D) Planetary Systems, E) Streetwise, F) Survival
+                    G) Technology
+                    0) Exit
+            """
+            ;
+    private static String mechanicalSkills =
+            """
+                    A) Astrogation, B) Beast Riding, C) Repulsorlift Operation
+                    D) Starship Gunnery, E) Starship Piloting, F) Starshift Shields
+                    0) Exit
+            """
+            ;
+    private static String perceptionSkills =
+            """
+            """
+            ;
     private static Scanner scanner = new Scanner(System.in);
     private static String name;
     private static String playerName;
@@ -23,7 +50,7 @@ public class Creation {
     private static Integer attributePoints = 18;
     private static Map<String, Integer> attributeMap = new HashMap<>();
     private static Integer skillPoints = 7;
-    private static Map<String, Integer> skillMap = new HashMap<>();
+    private static List<Skill> skills;
     private static List<Equipment> equipment = new ArrayList<>();
 
     private static Integer parseInteger(String input) {
@@ -118,7 +145,9 @@ public class Creation {
                     break;
                 }
 
-                skillMap.put(skillName, parsedAllocatedPoints);
+                parsedAllocatedPoints += attributeMap.get(attributes[i]);
+
+                skills.add(new Skill(skillName, attributes[i], parsedAllocatedPoints));
                 skillPoints -= parsedAllocatedPoints;
 
                 System.out.println("Do you want to add points to another skill? [y/n]");
@@ -307,8 +336,8 @@ public class Creation {
                 myWriter.write("\t" + attribute + ": " + newCharacter.getAttributeMap().get(attribute) + "D\n");
             }
             myWriter.write("Skills:\n");
-            for (String skill : newCharacter.getSkillMap().keySet()) {
-                myWriter.write("\t" + skill + ": " + newCharacter.getSkillMap().get(skill) + "D\n");
+            for (int i = 0; i < skills.size(); i++) {
+                myWriter.write("\t" + skills.get(i).getName() + ": " + newCharacter.getSkillMap().get(i).getValue() + "D\n");
             }
             myWriter.write("Equipment:\n");
             for (Equipment equipment : newCharacter.getEquipment()) {
@@ -340,7 +369,7 @@ public class Creation {
         skillPointDistribution();
         equipment();
 
-        PlayerCharacter newCh = new PlayerCharacter(name, playerName, attributeMap, skillMap);
+        PlayerCharacter newCh = new PlayerCharacter(name, playerName, attributeMap, skills);
         newCh.setEquipment(equipment);
 
         writeCharacterToFile(newCh);
