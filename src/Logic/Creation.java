@@ -41,8 +41,29 @@ public class Creation {
             ;
     private static String perceptionSkills =
             """
+                    A) Command, B) Con, C) Gambling
+                    D) Hide/Sneak, E) Search
+                    0) Exit
             """
             ;
+
+    private static String strengthSkills =
+            """
+                    A) Brawling, B) Climbing & Jumping, C) Lifting
+                    D) Stamina, E) Swimming
+                    0) Exit
+            """
+            ;
+
+    private static String technicalSkills =
+            """
+                    A) Computer Programming & Repair, B) Demolition
+                    C) Droid Programming & Repair, D) Medicine
+                    E) Repulsorlift Repair, F) Security, G) Starship Repair
+                    0) Exit
+            """
+            ;
+
     private static Scanner scanner = new Scanner(System.in);
     private static String name;
     private static String playerName;
