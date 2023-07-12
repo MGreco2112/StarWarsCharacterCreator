@@ -18,49 +18,43 @@ public class Creation {
             ;
     private static String dexteritySkills =
             """
-                    A) Blaster, B) Brawling Pary, C) Dodge
-                    D) Grenade, E) Heavy Weapons, F) Melee Parry,
-                    H) Melee Weapons
-                    0) Exit
+                    Blaster, Brawling Parry, Dodge
+                    Grenade, Heavy Weapons, Melee Parry,
+                    Melee Weapons
             """
             ;
     private static String knowledgeSkills =
             """
-                    A) Alien Races, B) Bureaucracy, C Languages
-                    D) Planetary Systems, E) Streetwise, F) Survival
-                    G) Technology
-                    0) Exit
+                    Alien Races, Bureaucracy, Languages
+                    Planetary Systems, Streetwise, Survival
+                    Technology
             """
             ;
     private static String mechanicalSkills =
             """
-                    A) Astrogation, B) Beast Riding, C) Repulsorlift Operation
-                    D) Starship Gunnery, E) Starship Piloting, F) Starshift Shields
-                    0) Exit
+                    Astrogation, Beast Riding, Repulsorlift Operation
+                    Starship Gunnery, Starship Piloting, Starship Shields
             """
             ;
     private static String perceptionSkills =
             """
-                    A) Command, B) Con, C) Gambling
-                    D) Hide/Sneak, E) Search
-                    0) Exit
+                    Command, Con, Gambling
+                    Hide/Sneak, Search
             """
             ;
 
     private static String strengthSkills =
             """
-                    A) Brawling, B) Climbing & Jumping, C) Lifting
-                    D) Stamina, E) Swimming
-                    0) Exit
+                    Brawling, Climbing & Jumping, Lifting
+                    Stamina, Swimming
             """
             ;
 
     private static String technicalSkills =
             """
-                    A) Computer Programming & Repair, B) Demolition
-                    C) Droid Programming & Repair, D) Medicine
-                    E) Repulsorlift Repair, F) Security, G) Starship Repair
-                    0) Exit
+                    Computer Programming & Repair, Demolition
+                    Droid Programming & Repair, Medicine
+                    Repulsorlift Repair, Security, Starship Repair
             """
             ;
 
@@ -71,7 +65,7 @@ public class Creation {
     private static Integer attributePoints = 18;
     private static Map<String, Integer> attributeMap = new HashMap<>();
     private static Integer skillPoints = 7;
-    private static List<Skill> skills;
+    private static List<Skill> skills = new ArrayList<>();
     private static List<Equipment> equipment = new ArrayList<>();
 
     private static Integer parseInteger(String input) {
@@ -137,15 +131,16 @@ public class Creation {
     }
 
     private static void skillPointDistribution() {
-        //TODO build list of skills based on Attribute class
-        //Have parent Attribute die code added to child Skill die code
         //TODO implement splitting up dice into added modifiers
         String[] attributes = new String[] {"Dexterity", "Knowledge", "Mechanical", "Perception", "Strength", "Technical"};
+        String[] skillsArray = new String[] {dexteritySkills, knowledgeSkills, mechanicalSkills, perceptionSkills, strengthSkills, technicalSkills};
         String continueLoop = "Y";
         System.out.println("Skill Point Distribution");
         for (int i = 0; i < attributes.length; i++) {
             do {
-                System.out.println("Do you wish to allocate Skill Points toward any " + attributes[i] + "Skills? [y/n]");
+
+                System.out.println(skillsArray[i]);
+                System.out.println("Do you wish to allocate Skill Points toward any " + attributes[i] + " Skills? [y/n]");
                 String decision = scanner.nextLine();
 
                 if (decision.equalsIgnoreCase("n")) {
@@ -166,10 +161,10 @@ public class Creation {
                     break;
                 }
 
+                skillPoints -= parsedAllocatedPoints;
                 parsedAllocatedPoints += attributeMap.get(attributes[i]);
 
                 skills.add(new Skill(skillName, attributes[i], parsedAllocatedPoints));
-                skillPoints -= parsedAllocatedPoints;
 
                 System.out.println("Do you want to add points to another skill? [y/n]");
                 String choice = scanner.nextLine();

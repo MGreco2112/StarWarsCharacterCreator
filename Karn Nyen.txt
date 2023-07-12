@@ -8,9 +8,9 @@ Attributes:
 	Knowledge: 2D
 	Strength: 3D
 Skills:
-	Blaster Combat: 2D
-	Starship Piloting: 3D
-	Starship Repair: 2D
+	Blaster: 6D
+	Starship Piloting: 7D
+	Starship Repair: 5D
 Equipment:
 	Blaster Pistol, 4D, Range: (10, 30, 120)
 	Comlink
