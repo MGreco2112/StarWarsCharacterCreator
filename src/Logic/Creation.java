@@ -63,8 +63,10 @@ public class Creation {
     private static String playerName;
     //TODO implement a system to disallow more points to be added than are available
     private static Integer attributePoints = 18;
+    private static Integer splitAttributePoints = 0;
     private static Map<String, Integer> attributeMap = new HashMap<>();
     private static Integer skillPoints = 7;
+    private static Integer splitSkillPoints = 0;
     private static List<Skill> skills = new ArrayList<>();
     private static List<Equipment> equipment = new ArrayList<>();
 
