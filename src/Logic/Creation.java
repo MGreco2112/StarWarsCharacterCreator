@@ -63,10 +63,10 @@ public class Creation {
     private static String playerName;
     //TODO implement a system to disallow more points to be added than are available
     private static Integer attributePoints = 18;
-    private static Integer splitAttributePoints = 0;
+    private static Integer attributePips = 0;
     private static Map<String, Integer> attributeMap = new HashMap<>();
     private static Integer skillPoints = 7;
-    private static Integer splitSkillPoints = 0;
+    private static Integer skillPips = 0;
     private static List<Skill> skills = new ArrayList<>();
     private static List<Equipment> equipment = new ArrayList<>();
 
@@ -111,25 +111,35 @@ public class Creation {
                 attributeMap.put(forceAttributes[i], parsedInput);
                 attributePoints -= parsedInput;
             }
-        } else {
-            for (int i = 0; i < attributes.length; i++) {
-                System.out.println("You can allocate at minimum 2D per Attribute, but no larger than 4D.");
-                System.out.println("You have " + attributePoints + "D remaining.");
-                System.out.println("How many D for the " + attributes[i] + " attribute?");
-                String attributeDie = scanner.nextLine();
-
-                Integer parsedInput = parseInteger(attributeDie);
-
-                if (parsedInput == null || parsedInput < 2 || parsedInput > 4) {
-                    System.out.println("Invalid Entry, try again.");
-                    i--;
-                    continue;
-                }
-
-                attributeMap.put(attributes[i], parsedInput);
-                attributePoints -= parsedInput;
-            }
         }
+
+        for (int i = 0; i < attributes.length; i++) {
+            if (attributePoints <= 0) {
+                System.out.println("You have incorrectly allocated points.");
+                System.out.println("Try again.");
+                i = -1;
+                attributeMap.clear();
+                attributePoints = 18;
+                continue;
+            }
+
+            System.out.println("You can allocate at minimum 2D per Attribute, but no larger than 4D.");
+            System.out.println("You have " + attributePoints + "D remaining.");
+            System.out.println("How many D for the " + attributes[i] + " attribute?");
+            String attributeDie = scanner.nextLine();
+
+            Integer parsedInput = parseInteger(attributeDie);
+
+            if (parsedInput == null || parsedInput < 2 || parsedInput > 4) {
+                System.out.println("Invalid Entry, try again.");
+                i--;
+                continue;
+            }
+
+            attributeMap.put(attributes[i], parsedInput);
+            attributePoints -= parsedInput;
+        }
+
     }
 
     private static void skillPointDistribution() {
@@ -164,6 +174,17 @@ public class Creation {
                 }
 
                 skillPoints -= parsedAllocatedPoints;
+
+                if (skillPoints <= 0) {
+                    System.out.println("You have allocated points incorrectly.");
+                    System.out.println("Try again");
+
+                    skills.clear();
+                    skillPoints = 7;
+                    i = -1;
+                    continue;
+                }
+
                 parsedAllocatedPoints += attributeMap.get(attributes[i]);
 
                 skills.add(new Skill(skillName, attributes[i], parsedAllocatedPoints));
