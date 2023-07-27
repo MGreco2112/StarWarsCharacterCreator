@@ -7,7 +7,7 @@ import java.util.Map;
 public class PlayerCharacter {
     private String name;
     private String playerName;
-    private Integer forcePoints = 0;
+    private Integer forcePoints = 1;
     private Integer darkSidePoints = 0;
     private Integer woundStatus = 0;
     private Integer skillPoints = 0;
@@ -98,6 +98,18 @@ public class PlayerCharacter {
     }
 
     public String toString() {
-        return name + "\n";
+        return name;
+    }
+
+    public String getWoundLevel() {
+        if (woundStatus == 0) {
+            return "Unwounded";
+        } else if (woundStatus == 1) {
+            return "Wounded";
+        } else if (woundStatus == 2) {
+            return "Incapacitated";
+        } else {
+            return "Mortally Wounded";
+        }
     }
 }
