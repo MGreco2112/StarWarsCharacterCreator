@@ -176,13 +176,26 @@ public class Creation {
                 skillPoints -= parsedAllocatedPoints;
 
                 if (skillPoints <= 0) {
-                    System.out.println("You have allocated points incorrectly.");
-                    System.out.println("Try again");
+                    System.out.println("You have allocated all your skill points.");
 
-                    skills.clear();
-                    skillPoints = 7;
-                    i = -1;
-                    continue;
+                    for (Skill skill : skills) {
+                        System.out.println(skill.getName() + ": " + skill.getValue());
+                    }
+
+                    System.out.println("Are these skills correct? [y/n]");
+
+                    String userRetriesSkills = scanner.nextLine();
+
+                    if (userRetriesSkills.equalsIgnoreCase("y")) {
+                        return;
+                    } else {
+                        skills.clear();
+                        skillPoints = 7;
+                        i = -1;
+                        continue;
+                    }
+
+
                 }
 
                 parsedAllocatedPoints += attributeMap.get(attributes[i]);
