@@ -386,12 +386,16 @@ public class Creation {
             myWriter.write("\t\"playerName\": " + "\"" + newCharacter.getPlayerName() + "\",\n");
             myWriter.write("\t\"attributes\": [\n");
             for (String attribute : newCharacter.getAttributeMap().keySet()) {
-                myWriter.write("\t\t\"" + attribute + "\": \"" + newCharacter.getAttributeMap().get(attribute) + "D\",\n");
+                myWriter.write("\t\t{\"" + attribute + "\": \"" + newCharacter.getAttributeMap().get(attribute) + "D\"},\n");
             }
             myWriter.write("\t],\n");
             myWriter.write("\t\"skills\": [\n");
             for (int i = 0; i < skills.size(); i++) {
-                myWriter.write("\t\t{\"" + skills.get(i).getName() + "\": \"" + newCharacter.getSkillMap().get(i).getValue() + "D\"},\n");
+                if (i < skills.size() - 1) {
+                    myWriter.write("\t\t{\"" + skills.get(i).getName() + "\": \"" + newCharacter.getSkillMap().get(i).getValue() + "D\"},\n");
+                } else {
+                    myWriter.write("\t\t{\"" + skills.get(i).getName() + "\": \"" + newCharacter.getSkillMap().get(i).getValue() + "D\"}\n");
+                }
             }
             myWriter.write("\t],\n");
             myWriter.write("\"equipment\": [\n");
@@ -411,7 +415,7 @@ public class Creation {
             myWriter.write("\t\"forcePoints\": \"" + newCharacter.getForcePoints() + "\",\n");
             myWriter.write("\t\"darkSidePoints\": \"" + newCharacter.getDarkSidePoints() + "\",\n");
             myWriter.write("\t\"skillPoints\": \"" + newCharacter.getSkillPoints() + "\",\n");
-            myWriter.write("\t\"woundStatus\": \"" + newCharacter.getWoundStatus() + "\",\n");
+            myWriter.write("\t\"woundStatus\": \"" + newCharacter.getWoundStatus() + "\"\n");
             myWriter.write("}");
             myWriter.close();
             System.out.println("Successfully wrote to the file.");

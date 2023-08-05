@@ -1,22 +1,23 @@
 {	"name": "Karn Nyen",
 	"playerName": "Mads",
 	"attributes": [
-		"Dexterity": "4D",
-		"Technical": "3D",
-		"Mechanical": "4D",
-		"Perception": "2D",
-		"Knowledge": "2D",
-		"Strength": "3D",
+		{"Dexterity": "4D"},
+		{"Technical": "3D"},
+		{"Mechanical": "4D"},
+		{"Perception": "2D"},
+		{"Knowledge": "2D"},
+		{"Strength": "3D"},
 	],
 	"skills": [
 		{"Blaster": "7D"},
-		{"Brawling Parry": "6D"},
+		{"Starship Piloting": "6D"}
 	],
 "equipment": [
 		{"Blaster Pistol", "4D", "Range: (10, 30, 120)"},
-	],
+		{"Comlink"},
+],
 	"forcePoints": "0",
 	"darkSidePoints": "0",
 	"skillPoints": "0",
-	"woundStatus": "0",
+	"woundStatus": "0"
 }
