@@ -382,36 +382,36 @@ public class Creation {
         try {
             FileWriter myWriter = new FileWriter(newCharacter.getName() + ".json");
             myWriter.write("{");
-            myWriter.write("\tname: " + newCharacter.getName() + ",\n");
-            myWriter.write("\tplayerName: " + newCharacter.getPlayerName() + ",\n");
-            myWriter.write("\tattributes: [\n");
+            myWriter.write("\t\"name\": " + "\"" + newCharacter.getName() + "\",\n");
+            myWriter.write("\t\"playerName\": " + "\"" + newCharacter.getPlayerName() + "\",\n");
+            myWriter.write("\t\"attributes\": [\n");
             for (String attribute : newCharacter.getAttributeMap().keySet()) {
-                myWriter.write("\t\t" + attribute + ": " + newCharacter.getAttributeMap().get(attribute) + "D,\n");
+                myWriter.write("\t\t\"" + attribute + "\": \"" + newCharacter.getAttributeMap().get(attribute) + "D\",\n");
             }
             myWriter.write("\t],\n");
-            myWriter.write("\tskills: [\n");
+            myWriter.write("\t\"skills\": [\n");
             for (int i = 0; i < skills.size(); i++) {
-                myWriter.write("\t\t" + skills.get(i).getName() + ": " + newCharacter.getSkillMap().get(i).getValue() + "D,\n");
+                myWriter.write("\t\t{\"" + skills.get(i).getName() + "\": \"" + newCharacter.getSkillMap().get(i).getValue() + "D\"},\n");
             }
             myWriter.write("\t],\n");
-            myWriter.write("equipment: [\n");
+            myWriter.write("\"equipment\": [\n");
             for (Equipment equipment : newCharacter.getEquipment()) {
                 if (equipment instanceof Weapon) {
-                    myWriter.write("\t\t" + equipment.getName() + ", ");
-                    myWriter.write(((Weapon) equipment).getDamageCode() + "D, ");
-                    myWriter.write("Range: (");
+                    myWriter.write("\t\t{\"" + equipment.getName() + "\", ");
+                    myWriter.write("\"" + ((Weapon) equipment).getDamageCode() + "D\", ");
+                    myWriter.write("\"Range: (");
                     myWriter.write(((Weapon) equipment).getMaxShortRange() + ", ");
                     myWriter.write(((Weapon) equipment).getMaxMediumRange() + ", ");
-                    myWriter.write(((Weapon) equipment).getMaxLongRange() + "),\n");
+                    myWriter.write(((Weapon) equipment).getMaxLongRange() + ")\"},\n");
                 } else {
-                    myWriter.write("\t\t" + equipment.getName() + "\n,");
+                    myWriter.write("\t\t{\"" + equipment.getName() + "\"}\n,");
                 }
             }
             myWriter.write("\t],\n");
-            myWriter.write("\tforcePoints: " + newCharacter.getForcePoints() + ",\n");
-            myWriter.write("\tdarkSidePoints: " + newCharacter.getDarkSidePoints() + ",\n");
-            myWriter.write("\tskillPoints: " + newCharacter.getSkillPoints() + ",\n");
-            myWriter.write("\twoundStatus: " + newCharacter.getWoundStatus() + ",\n");
+            myWriter.write("\t\"forcePoints\": \"" + newCharacter.getForcePoints() + "\",\n");
+            myWriter.write("\t\"darkSidePoints\": \"" + newCharacter.getDarkSidePoints() + "\",\n");
+            myWriter.write("\t\"skillPoints\": \"" + newCharacter.getSkillPoints() + "\",\n");
+            myWriter.write("\t\"woundStatus\": \"" + newCharacter.getWoundStatus() + "\",\n");
             myWriter.write("}");
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
