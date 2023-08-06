@@ -1,23 +1,25 @@
-{	"name": "Karn Nyen",
+{
+	"name": "Karn Nyen",
 	"playerName": "Mads",
 	"attributes": [
-		{"Dexterity": "4D"},
-		{"Technical": "3D"},
-		{"Mechanical": "4D"},
-		{"Perception": "2D"},
-		{"Knowledge": "2D"},
-		{"Strength": "3D"},
+		{"Dexterity":4},
+		{"Technical":3},
+		{"Mechanical":4},
+		{"Perception":2},
+		{"Knowledge":2},
+		{"Strength":3}
 	],
 	"skills": [
-		{"Blaster": "7D"},
-		{"Starship Piloting": "6D"}
+		{"Blaster": 7},
+		{"Starship Piloting": 6},
+		{"Starship Repair": 5}
 	],
-"equipment": [
-		{"Blaster Pistol", "4D", "Range: (10, 30, 120)"},
-		{"Comlink"},
-],
-	"forcePoints": "0",
-	"darkSidePoints": "0",
-	"skillPoints": "0",
-	"woundStatus": "0"
+	"equipment": [
+		{"name": "Blaster Pistol", "damageCode": 4, "maxShortRange": 10, "maxMediumRange": 30, "maxLongRange": 120},
+		{"name": "Comlink"}
+	],
+	"forcePoints": 0,
+	"darkSidePoints": 0,
+	"skillPoints": 0,
+	"woundStatus": 0
 }

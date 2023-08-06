@@ -112,4 +112,72 @@ public class PlayerCharacter {
             return "Mortally Wounded";
         }
     }
+
+    public String outputFormatter() {
+        return "{\n" +
+                "\t\"name\": \"" + name + "\",\n" +
+                "\t\"playerName\": \"" + playerName + "\",\n" +
+                "\t\"attributes\": [\n" + attributeFormatter() + "\t],\n" +
+                "\t\"skills\": [\n" + skillFormatter() + "\t],\n" +
+                "\t\"equipment\": [\n" + equipmentFormatter() + "\t],\n" +
+                "\t\"forcePoints\": " + forcePoints + ",\n" +
+                "\t\"darkSidePoints\": " + darkSidePoints + ",\n" +
+                "\t\"skillPoints\": " + skillPoints + ",\n" +
+                "\t\"woundStatus\": " + woundStatus + "\n" +
+                "}";
+    }
+
+    private String attributeFormatter() {
+        String output = "";
+
+        String[] attributes = new String[] {"Dexterity", "Technical", "Mechanical", "Perception", "Knowledge", "Strength"};
+
+        for (int i = 0; i < attributes.length; i++) {
+            if (i < attributes.length - 1) {
+                output += "\t\t{\"" + attributes[i] + "\":" + attributeMap.get(attributes[i]) + "},\n";
+            } else {
+                output += "\t\t{\"" + attributes[i] + "\":" + attributeMap.get(attributes[i]) + "}\n";
+            }
+        }
+
+        return output;
+    }
+
+    private String skillFormatter() {
+        String output = "";
+
+        for (int i = 0; i < skillMap.size(); i++) {
+            if (i < skillMap.size() - 1) {
+                output += "\t\t{\"" + skillMap.get(i).getName() + "\": " + skillMap.get(i).getValue() + "},\n";
+            } else {
+                output += "\t\t{\"" + skillMap.get(i).getName() + "\": " + skillMap.get(i).getValue() + "}\n";
+            }
+        }
+
+        return output;
+    }
+
+    private String equipmentFormatter() {
+        String output = "";
+
+        for (int i = 0; i < equipment.size(); i++) {
+            if (equipment.get(i) instanceof Weapon) {
+                Weapon weapon = (Weapon) equipment.get(i);
+                output += "\t\t{\"name\": \"" + weapon.getName() + "\", \"damageCode\": "
+                        + weapon.getDamageCode() + ", \"maxShortRange\": " + weapon.getMaxShortRange() +
+                        ", \"maxMediumRange\": " + weapon.getMaxMediumRange() + ", \"maxLongRange\": " +
+                        weapon.getMaxLongRange() + "}";
+            } else {
+                output += "\t\t{\"name\": \"" + equipment.get(i).getName() + "\"}";
+            }
+
+            if (i < equipment.size() - 1) {
+                output += ",\n";
+            } else {
+                output += "\n";
+            }
+        }
+
+        return output;
+    }
 }
